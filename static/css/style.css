@@ -1,0 +1,109 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000; /* Black background */
+    color: #0a0a0a; /* White text */
+    margin: 0;
+    margin-right: 400px;
+    background-image: url("/static/images/bowler.jpg"); /* Replace with your image */
+    background-size: cover; /* Ensures the image covers the entire area */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents image from repeating */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh; /* Ensures the body takes at least the full height of the viewport */
+}
+
+/* Heading styles */
+h1 {
+    font-size: 36px;
+    margin-top: 150px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Form container styles */
+.form-container {
+    background-color: rgba(255, 255, 255, 0.4); /* Transparent background */
+    padding: 20px;
+    border-radius: 10px;
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.2); /* Light shadow */
+}
+
+input[type="text"] {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #fff; /* White border */
+    border-radius: 5px;
+    background-color: rgba(51, 51, 51, 0.5); /* Dark input background */
+    color: #fff; /* White text */
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+input::placeholder {
+    color: #ddd; /* Light gray placeholder */
+    color: white;
+}
+
+button {
+    background-color: #fff; /* White background */
+    color: #000; /* Black text */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+button:hover {
+    background-color: #000; /* Black background on hover */
+    color: #fff; /* White text */
+    border: 1px solid #fff;
+}
+
+/* Stats container styles */
+.stats-container {
+    background-color: rgba(255, 255, 255, 0.4); /* Transparent background */
+    padding: 20px;
+    border-radius: 10px;
+    width: 320px;
+    margin-top: 30px;
+    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.2); /* Light shadow */
+}
+
+/* Stats section */
+h2 {
+    margin-top: 10px;
+    font-size: 24px;
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+ul li {
+    margin: 10px 0;
+    color: #050505; /* Keep list items white */
+}
+
+ul li strong {
+    color: #080707; /* Keep strong tags white */
+}
+
+/* Error message */
+p {
+    color: red;
+    text-align: center;
+}

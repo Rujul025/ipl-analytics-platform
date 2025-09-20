@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cricket Analysis</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styl.css') }}"
+    />
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('#team-prediction form');
+    const homeTeamInput = document.getElementById('home_team');
+    const awayTeamInput = document.getElementById('away_team');
+    const tossWonInput = document.getElementById('toss_won');
+    const decisionInput = document.getElementById('decision');
+
+    form.addEventListener('submit', function(event) {
+        let isValid = true;
+        const decisionValue = decisionInput.value.trim().toLowerCase();
+
+        // Check if home and away teams are the same
+        if (homeTeamInput.value.trim().toLowerCase() === awayTeamInput.value.trim().toLowerCase()) {
+            alert('Home team and Away team cannot be the same!');
+            isValid = false;
+        }
+
+        // Validate toss decision (must be "bat" or "field")
+        // if (decisionValue !== 'bat' && decisionValue !== 'field') {
+        //     alert('Toss decision must be either "Bat" or "Field"');
+        //     isValid = false;
+        // }
+
+        // Prevent form submission if any validation fails
+        if (!isValid) {
+            event.preventDefault();
+        }
+    });
+});
+
+    </script>
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <div class="navbar">
+      <span class="navbar-heading">Cricket Analysis</span>
+      <div class="navbar-links">
+          <a href="/index">Bowler Details</a>
+          <a href="/batsmen">Batsmen Details</a>
+          <a href="/top_batsmen_form">Top Batsmen Players</a>
+      </div>
+  </div>
+  
+
+    <h1></h1>
+
+      <!-- Top 10 Bowlers and Batsmen section -->
+      <div class="top-players" id="top-players">
+        <div class="top-bowlers">
+          <h2>Top 10 Bowlers</h2>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Bowler</th>
+                <th>Wickets Taken</th>
+                <th>Overs Bowled</th>
+                <th>Runs Conceded</th>
+                <th>Economy Rate</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if top_bowlers %} {% for bowler in top_bowlers %}
+              <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ bowler['Bowler'] }}</td>
+                <td>{{ bowler['Wickets_Taken'] }}</td>
+                <td>{{ bowler['Overs_Bowled'] }}</td>
+                <td>{{ bowler['Runs_Conceded'] }}</td>
+                <td>{{ bowler['Economy_Rate'] }}</td>
+              </tr>
+              {% endfor %} {% else %}
+              <tr>
+                <td colspan="6">No top bowlers data available.</td>
+              </tr>
+              {% endif %}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="top-batsmen">
+          <h2>Top 10 Batsmen</h2>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Batsman</th>
+                <th>Runs Scored</th>
+                <th>Highest Score</th>
+                <th>Matches Played</th>
+                <th>Average</th>
+                <th>Strike Rate</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if top_batsmen %} {% for batsman in top_batsmen %}
+              <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ batsman['Batsman'] }}</td>
+                <td>{{ batsman['Runs_Scored'] }}</td>
+                <td>{{ batsman['Highest_Score'] }}</td>
+                <td>{{ batsman['Matches_Played'] }}</td>
+                <td>{{ batsman['Average_Score'] }}</td>
+                <td>{{ batsman['Strike_Rate'] }}</td>
+              </tr>
+              {% endfor %} {% else %}
+              <tr>
+                <td colspan="7">No top batsmen data available.</td>
+              </tr>
+              {% endif %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Team Analysis Section -->
+      <!-- Team Analysis Section -->
+      <div class="team-analysis">
+        <h2>Team Analysis</h2>
+        <div class="team-buttons">
+          <form action="/analysis" method="post" class="team-form">
+            <input type="hidden" name="team_name" value="CSK" />
+            <button type="submit" class="team-button">
+              <img
+                src="{{ url_for('static', filename='images/csk.jpeg') }}"
+                alt="CSK Logo"
+              /><br />
+              Chennai Super Kings
+            </button>
+          </form>
+          <form action="/analysis" method="post" class="team-form">
+            <input type="hidden" name="team_name" value="MI" />
+            <button type="submit" class="team-button">
+              <img
+                src="{{ url_for('static', filename='images/mi.png') }}"
+                alt="MI Logo"
+              /><br />
+              Mumbai Indians
+            </button>
+          </form>
+          <form action="/analysis" method="post" class="team-form">
+            <input type="hidden" name="team_name" value="RCB" />
+            <button type="submit" class="team-button">
+              <img
+                src="{{ url_for('static', filename='images/rcb.jpeg') }}"
+                alt="RCB Logo"
+              /><br />
+              Royal Challengers Bangalore
+            </button>
+          </form>
+          <form action="/analysis" method="post" class="team-form">
+            <input type="hidden" name="team_name" value="KKR" />
+            <button type="submit" class="team-button">
+              <img
+                src="{{ url_for('static', filename='images/kkr.png') }}"
+                alt="KKR Logo"
+              /><br />
+              Kolkata Knight Riders
+            </button>
+          </form>
+          <form action="/analysis" method="post" class="team-form">
+            <input type="hidden" name="team_name" value="DC" />
+            <button type="submit" class="team-button">
+              <img
+                src="{{ url_for('static', filename='images/delhi.png') }}"
+                alt="DC Logo"
+              /><br />
+              Delhi Capitals
+            </button>
+          </form>
+          <form action="/analysis" method="post" class="team-form">
+            <input type="hidden" name="team_name" value="SRH" />
+            <button type="submit" class="team-button">
+              <img
+                src="{{ url_for('static', filename='images/srh.webp') }}"
+                alt="SRH Logo"
+              /><br />
+              Sunrisers Hyderabad
+            </button>
+          </form>
+          <form action="/analysis" method="post" class="team-form">
+            <input type="hidden" name="team_name" value="KXIP"  />
+            <button type="submit" class="team-button">
+              <img
+                src="{{ url_for('static', filename='images/pk.png') }}"
+                alt="PBKS Logo"
+              /><br />
+              Punjab Kings
+            </button>
+          </form>
+          <form action="/analysis" method="post" class="team-form">
+            <input type="hidden" name="team_name" value="RR" />
+            <button type="submit" class="team-button">
+              <img
+                src="{{ url_for('static', filename='images/rr.png') }}"
+                alt="RR Logo"
+              /><br />
+              Rajasthan Royals
+            </button>
+          </form>
+          <form action="/analysis" method="post" class="team-form">
+            <input type="hidden" name="team_name" value="LSG" />
+            <button type="submit" class="team-button">
+              <img
+                src="{{ url_for('static', filename='images/lsg.png') }}"
+                alt="LSG Logo"
+              /><br />
+              Lucknow Super Giants
+            </button>
+          </form>
+          <form action="/analysis" method="post" class="team-form">
+            <input type="hidden" name="team_name" value="GT" />
+            <button type="submit" class="team-button">
+              <img
+                src="{{ url_for('static', filename='images/gt.jpeg') }}"
+                alt="GT Logo"
+              /><br />
+              Gujarat Titans
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Team Prediction Section -->
+      <section id="team-prediction">
+        <h2>Team Prediction</h2>
+        <form action="/team_prediction" method="POST">
+          <div>
+            <label for="home_team">Home Team:</label>
+            <input type="text" id="home_team" name="home_team" required />
+          </div>
+          <div>
+            <label for="away_team">Away Team:</label>
+            <input type="text" id="away_team" name="away_team" required />
+          </div>
+          <div>
+            <label for="toss_won">Team that won the toss:</label>
+            <input type="text" id="toss_won" name="toss_won" required />
+          </div>
+          <div>
+            <label for="decision">Toss Decision (Bat/Field):</label>
+            <input type="text" id="decision" name="decision" required />
+          </div>
+          <button type="submit">Predict Winner</button>
+        </form>
+      </section>
+    
+  </body>
+</html>

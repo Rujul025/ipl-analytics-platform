@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bowler Stats</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Stats for {{ bowler_name }}</h1>
+    <ul>
+        <li>Total Wickets: {{ stats["Total Wickets"] }}</li>
+        <li>Bowling Average: {{ stats["Bowling Average"] }}</li>
+        <li>Total Maidens: {{ stats["Total Maidens"] }}</li>
+        <li>Best Figures: {{ stats["Best Figures"] }}</li>
+    </ul>
+
+    <a href="/">Search for another bowler</a>
+</body>
+</html>

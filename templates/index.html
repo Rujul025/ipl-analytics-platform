@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bowler Stats</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form');
+            const bowlerNameInput = document.getElementById('bowler_name');
+    
+            form.addEventListener('submit', function(event) {
+                const bowlerName = bowlerNameInput.value.trim();
+    
+                if (!bowlerName) {
+                    event.preventDefault(); // Prevent form submission
+                    alert("Please enter a bowler's name.");
+                    bowlerNameInput.focus(); // Focus the input field
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Bowler Statistics</h1>
+    
+    <div class="form-container">
+        <form action="/get_bowler_stats" method="post">
+            <input type="text" id="bowler_name" name="bowler_name" placeholder="Enter Bowler Name" required>
+            <button type="submit">Get Stats</button>
+        </form>
+    </div>
+    
+    {% if error %}
+        <p style="color:red;">{{ error }}</p>
+    {% endif %}
+    
+    {% if stats %}
+        <div class="stats-container">
+            <h2>Statistics for {{ bowler_name }}:</h2>
+            <ul>
+                <li><strong>Total Wickets:</strong> {{ stats["Total Wickets"] }}</li>
+                <li><strong>Bowling Average:</strong> {{ stats["Bowling Average"] }}</li>
+                <li><strong>Total Maidens:</strong> {{ stats["Total Maidens"] }}</li>
+                <li><strong>Best Figures:</strong> {{ stats["Best Figures"] }}</li>
+                <li><strong>Economy Rate:</strong> {{ stats["Economy Rate"] }}</li>
+                <li><strong>Total Runs Conceded:</strong> {{ stats["Total Runs Conceded"] }}</li>
+                <li><strong>Fours Conceded:</strong> {{ stats["Fours Conceded"] }}</li>
+                <li><strong>Sixes Conceded:</strong> {{ stats["Sixes Conceded"] }}</li>
+            </ul>
+        </div>
+    {% endif %}
+</body>
+</html>

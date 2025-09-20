@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Team Analysis - {{ team_name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/analysis_style.css') }}" />
+</head>
+<body>
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/index">Bowler Details</a>
+    </div>
+
+    <h1>Analysis for {{ team_name }}</h1>
+
+    {% if highest_score is not none %}
+        <h2>Highest Score: {{ highest_score }}</h2>
+    {% else %}
+        <h2>No highest score available.</h2>
+    {% endif %}
+
+    <h3>Performance Summary</h3>
+    <table class="transparent-table">
+        <thead>
+            <tr>
+                <th>Opponent</th>
+                <th>Matches Played</th>
+                <th>Wins</th>
+                <th>Losses</th>
+                <th>Team Highest Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if performance_summary is not none %}
+                {% if performance_summary.empty %}
+                    <tr>
+                        <td colspan="5">No matches played against other teams.</td>
+                    </tr>
+                {% else %}
+                    {% for index, row in performance_summary.iterrows() %}
+                        <tr>
+                            <td>{{ row['Opponent'] }}</td>
+                            <td>{{ row['Matches Played'] }}</td>
+                            <td>{{ row['Wins'] }}</td>
+                            <td>{{ row['Losses'] }}</td>
+                            <td>{{ row['Team Highest Score'] }}</td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            {% else %}
+                <tr>
+                    <td colspan="5">No performance data available.</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+</body>
+</html>
